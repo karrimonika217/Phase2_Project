@@ -1,0 +1,282 @@
+----Fligh Details Page-------
+
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*,com.mysql.jdbc.Driver" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Flight Details Page</title>
+</head>
+<body>
+<br><center><h4>Flight Details Page</h4></center>
+<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
+     url="jdbc:mysql://localhost:3306/db_world"
+     user="root" password="root"/>
+<br>
+<!-- sql:query tag -->
+ <sql:query dataSource="${db}" var="rs">
+      SELECT *from FlightDetails where source_city=? && destination_city=? && departure_time
+      <sql:param value="${param.src}"/>  
+      <sql:param value="${param.des}"/>
+      <sql:param value="${param.No_passengers}"/>
+      <sql:param value="${param.Date}"/>
+ </sql:query>
+ 
+ <form action="RegisterPage.jsp" method="post"><br><br>
+ <table border="2" width="100%">
+ <tr>
+ <th>Airline_Name</th>
+ <th>Price</th>
+ <th>Flight_No</th>
+ <th>Source_city</th>
+ <th>Destination_city</th>
+ <th>Departure_Time</th>
+ <th>Arrival_Time</th>
+ <th>Total_Seats</th>
+ <th>Booked_Seats</th>
+ <th>Available_Seats</th>
+ <th>Date_of_Travel</th>
+ <th>Class(Business/Economy)</th>
+ <th>Booking_Link</th>
+ </tr>
+    <c:forEach var="table" items="${rs.rows}">
+       <tr>
+          <td><c:out value="$(table.airline_name}"/></td>
+          <td><c:out value="$(table.price}"/></td>
+          <td><c:out value="$(table.flight_no}"/></td>
+          <td><c:out value="$(table.source_city}"/></td>
+          <td><c:out value="$(table.destination_city}"/></td>
+          <td><c:out value="$(table.departure_time_from_source}"/></td>
+          <td><c:out value="$(table.arrival_time_to_destination}"/></td>
+          <td><c:out value="$(table.total_seats}"/></td>
+          <td><c:out value="$(table.booked_seats}"/></td>
+          <td><c:out value="$(table.seat_availability}"/></td>
+          <td><c:out value="$(table.date_of_travel}"/></td>
+          <td><c:out value="$(table['class']}"/></td>
+          <td><input type="Submit" value="Book_Nov"></td>
+       </tr>
+    </c:forEach>
+  </table>
+    </form>
+                
+</body>
+</html>
+
+
+
+-------SEARCH PAGE-----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*,com.mysql.jdbc.Driver"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="sql" %>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Search page</title>
+</head>
+<body>
+<br>
+<center><h4>Search page</h4></center>
+<!-- sql:setDataSource tag -->
+<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
+     url="jdbc:mysql://localhost:3306/db_world"
+     user="root" password="root"/>
+<!-- sql:update tag INSERT -->
+<sql:update dataSource="${db}" var="count">
+INSERT INTO Login values(?,?);
+<sql:paramname value="${param.username}"/>
+<sql:paramname value="${param.userpassword}"/>
+</sql:update>
+
+<form action="Flightdetailspage.jsp" method="post">
+date of travel(dd/mm/yyyy):input type=" name="date"<br>
+Source city:<input type="text" name="src"><br>
+Destination city:<input type="text" name="des"><br>
+Number of passengers:<input type="text" name="No_Passengers"><br>
+<button>Search</button>
+</form>
+
+</body>
+</html>
+
+
+-----USER LOGIN PAGE----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<center><h4>user login page</h4></center>
+<form action="SearchPage.jsp" method="post"><centre>
+Username:<input type="text" name="username"><br><br>
+Password:<input type="password" name="password"><br><br>
+<button>Submit</button></centre></form>
+</body>
+</html>
+
+
+------DUMMY PAGE----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>DummyPage</title>
+</head>
+<body>
+<br><center><h4>Payment Gateway</h4></center>
+<form action="Confirmation.jsp" method="post">
+<img src="C:\HTML\Image\nn.png">
+Enter user id: <input type="text" name="email"/><br>
+Flight_no:<input type="text" name="flight_no"/>
+<button>Confirm</button>
+</form>
+</body>
+</html>
+
+
+----REGISTER PAGE----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ include file="header.jsp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<br><center><h4>Registration Page</h4></center>
+<form action="ReviewPage.jsp" method="post">
+     FullName:<input type="text" name="fullname"><br><br>
+     Address :<input type="text" name="add"><br><br>
+     Age     :<input type="text" name="age"><br><br>
+     MObile  :<input type="text" name="mobile"><br><br>
+     Email/Username :<input  type="text" name="email"><br><br>
+     ID_Proof:<select name="dropdown">
+     <option value="Aadharcard" selected>Aadhar card</option>
+     <option value="SSN" selected>SSN</option>
+     <option value="Passport" selected>Passport</option>
+     <option value="VoterId" selected>VoterId</option>
+     <option value="Driving license" selected>Driving license</option>
+     </select>
+     Enter_Id :<input type="text" name="id_proof"><br><br>
+     Country :<input type="text" name="country"><br><br>
+     <button>Review</button>
+</form>
+</body>
+</html>
+
+-----REVIEW PAGE-----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.io.*,java.util.*,java.sql.*,com.mysql.jdbc.Driver" %>
+    <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="sql"%>
+    <%@ include file="header.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Review Page</title>
+</head>
+<body>
+<center><h4>review page</h4></center>
+<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://loacalhost:3306/db_world"
+    user="root" password="root"/>
+  <!-- sql:update tag to INSERT -->  
+<sql:update dataSource="$(db)" var="count">
+INSERT INTO registerdetails VALUES(?,?,?,?,?,?,?,?);
+<sql:paramname value="$(param.fullname)" />
+<sql:paramname value="$(param.add)" />
+<sql:paramname value="$(param.age)" />
+<sql:paramname value="$(param.mobile)" />
+<sql:paramname value="$(param.email)" />
+<sql:paramname value="$(param.dropdown)" />
+<sql:paramname value="$(param.id_proof)" />
+<sql:paramname value="$(param.country)" />
+</sql:update>
+<form action="DummyPage.jsp" method="post">
+<p>FullName: <c:out value="$(param.fullname)"/><p>
+<p>Address: <c:out value="$(param.add)"/><p>
+<p>Age: <c:out value="$(param.age)"/><p>
+<p>Mobile: <c:out value="$(param.mobile)"/><p>
+<p>Email/UserName: <c:out value="$(param.email)"/><p>
+<p>Dropdown: <c:out value="$(param.dropdown)"/><p>
+<p>Id_proof: <c:out value="$(param.id_proof)"/><p>
+<p>Country: <c:out value="$(param.Country)"/><p>
+<br><br>
+<button>Payment/</button>
+</form>
+</body>
+</html>
+
+----CONFIRMATION PAGE-----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.io.*,java.util.*,java.sql.*,com.mysql.jdbc.Driver" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="sql"%>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ConfirmationPage</title>
+</head>
+<body>
+<center><h4>Thank you for booking</h4></center><br>
+<!-- sql:update tag to INSERT -->
+<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/db_world"
+    user="root" password="root"/>
+  <br>  
+ <!-- sql:update tag to INSERT -->  
+<sql:update dataSource="${db}" var="count">
+INSERT INTO BookingDetails(email_id,flight_number) VALUES(?,?);
+<sql:paramname value="${param.email}"/>
+<sql:paramname value="${param.flight_no}"/>
+</sql:update>
+<!-- sql:query tag -->
+<sql:query dataSource="${db}" var="rs">
+    SELECT * from BookingDetails WHERE email_id=?
+<sql:paramname value="${param.email}"/>
+<sql:paramname value="${param.email}"/>
+</sql:query>
+ 
+ <table border="2" width="100%">
+ <tr>
+ <th>User_Id</th>
+ <th>Booking_Id</th>
+ <th>Flight_No</th>
+</tr>
+     <c:forEach var="table" items="${rs.rows}">
+     <tr>
+        <td><c:our value="${table.email_id}"/></td>
+        <td><c:our value="${table.email_id}"/></td>
+        <td><c:our value="${table.email_id}"/></td>
+      </tr>
+  </c:forEach>
+      </table>
+</body>
+</html>
