@@ -1,4 +1,4 @@
-----Fligh Details Page-------
+----Flight Details Page-------
 
 
 
@@ -18,7 +18,7 @@
 <body>
 <br><center><h4>Flight Details Page</h4></center>
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-     url="jdbc:mysql://localhost:3306/db_world"
+     url="jdbc:mysql://localhost:8010/db_world"
      user="root" password="root"/>
 <br>
 <!-- sql:query tag -->
@@ -91,7 +91,7 @@
 <center><h4>Search page</h4></center>
 <!-- sql:setDataSource tag -->
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-     url="jdbc:mysql://localhost:3306/db_world"
+     url="jdbc:mysql://localhost:8010/db_world"
      user="root" password="root"/>
 <!-- sql:update tag INSERT -->
 <sql:update dataSource="${db}" var="count">
@@ -201,7 +201,7 @@ Flight_no:<input type="text" name="flight_no"/>
 <body>
 <center><h4>review page</h4></center>
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://loacalhost:3306/db_world"
+    url="jdbc:mysql://loacalhost:8010/db_world"
     user="root" password="root"/>
   <!-- sql:update tag to INSERT -->  
 <sql:update dataSource="$(db)" var="count">
@@ -248,7 +248,7 @@ INSERT INTO registerdetails VALUES(?,?,?,?,?,?,?,?);
 <center><h4>Thank you for booking</h4></center><br>
 <!-- sql:update tag to INSERT -->
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost:3306/db_world"
+    url="jdbc:mysql://localhost:8010/db_world"
     user="root" password="root"/>
   <br>  
  <!-- sql:update tag to INSERT -->  
